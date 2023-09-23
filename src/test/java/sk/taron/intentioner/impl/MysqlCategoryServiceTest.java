@@ -12,12 +12,12 @@ import sk.taron.intentioner.mapper.CategoryDTOToEntity;
 import sk.taron.intentioner.mapper.CategoryEntityToDTO;
 import sk.taron.intentioner.model.UpdateCategoryRequest;
 import sk.taron.intentioner.persistence.CategoryRepository;
+import sk.taron.intentioner.persistence.IntentionRepository;
 
 import java.util.Optional;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static sk.taron.intentioner.CategoryDataProvider.CATEGORY_ID;
@@ -33,6 +33,9 @@ class MysqlCategoryServiceTest {
     private CategoryRepository categoryRepository;
 
     @Mock
+    private IntentionRepository intentionRepository;
+
+    @Mock
     private CategoryDTOToEntity categoryDTOtoEntity;
 
     @Mock
@@ -44,6 +47,7 @@ class MysqlCategoryServiceTest {
     void setUp(){
         this.categoryService = new MysqlCategoryService(
             categoryRepository,
+            intentionRepository,
             categoryDTOtoEntity,
             categoryEntityToDTO
         );

@@ -3,7 +3,7 @@ package sk.taron.intentioner;
 import java.util.List;
 
 import sk.taron.intentioner.model.IntentionDTO;
-import sk.taron.intentioner.model.UpdateIntentionRequest;
+import sk.taron.intentioner.model.IntentionModificationRequest;
 
 /**
  * Provides operations over intention.
@@ -18,9 +18,9 @@ public interface IntentionService {
     List<IntentionDTO> getAllIntentions();
 
     /**
-     * Get intetnion by id.
+     * Get intention by id.
      * 
-     * @param intentionId the id of the intenion
+     * @param intentionId the id of the intention
      * @return found intention
      */
     IntentionDTO getIntention(String intentionId);
@@ -28,18 +28,19 @@ public interface IntentionService {
     /**
      * Save intention.
      * 
-     * @param intention the intention to be saved
-     * @return saved intenion
+     * @param intentionModificationRequest contains data of the intention
+     * @return saved intention
      */
-    IntentionDTO saveIntention(IntentionDTO intention);
+    IntentionDTO saveIntention(IntentionModificationRequest intentionModificationRequest);
 
     /**
-     * Update existing intenion
+     * Update existing intention
+     *
      * @param intentionId the id of the existing intention
-     * @param updateIntentionRequest contains data to be updated
+     * @param intentionModificationRequest contains data to be updated
      * @return the updated intention
      */
-    IntentionDTO updateIntention(String intentionId, UpdateIntentionRequest updateIntentionRequest);
+    IntentionDTO updateIntention(String intentionId, IntentionModificationRequest intentionModificationRequest);
 
     /**
      * Delete intention.

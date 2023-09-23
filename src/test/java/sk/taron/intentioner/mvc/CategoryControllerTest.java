@@ -25,7 +25,6 @@ import static sk.taron.intentioner.CategoryDataProvider.UPDATE_CATEGORY_REQUEST;
 @WebMvcTest(CategoryController.class)
 class CategoryControllerTest {
 
-
     private static final String INVALID_CATEGORY_ID = "invalidCategoryId";
     private static final String NOT_FOUND_MESSAGE = "Category with id " + CATEGORY_ID + " was not found";
 
@@ -83,18 +82,6 @@ class CategoryControllerTest {
 
         mockMvc.perform(requestBuilder)
             .andExpect(status().isOk());
-    }
-
-    @Test
-    void getCategories() {
-    }
-
-    @Test
-    void getCategory() {
-    }
-
-    @Test
-    void updateCategory() {
     }
 
     @Test

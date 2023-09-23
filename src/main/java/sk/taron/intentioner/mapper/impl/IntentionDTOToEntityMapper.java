@@ -13,7 +13,6 @@ import sk.taron.intentioner.persistence.entity.Intention;
 public class IntentionDTOToEntityMapper implements IntentionDTOToEntity {
 
     private final CategoryDTOToEntity categoryDTOToEntity;
-
     
     /**
      * The constructor.

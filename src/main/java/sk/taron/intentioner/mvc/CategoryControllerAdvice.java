@@ -17,9 +17,11 @@ public class CategoryControllerAdvice {
             case 404: {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(intentionerException.getIntentionerError());
             }
-            default: ResponseEntity.internalServerError();
+            case 409: {
+                return ResponseEntity.status(HttpStatus.CONFLICT).body(intentionerException.getIntentionerError());
+            }
+            default: return ResponseEntity.internalServerError().build();
         }
-        return null;
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
