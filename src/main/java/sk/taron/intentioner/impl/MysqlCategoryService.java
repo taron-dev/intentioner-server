@@ -15,14 +15,17 @@ import sk.taron.intentioner.persistence.entity.Category;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.function.BiPredicate;
 import java.util.stream.Collectors;
 
 /**
  * The category service.
  */
-//TODO - cover with functional test
 @Named
 public class MysqlCategoryService implements CategoryService {
+
+    private static final BiPredicate<Category, IntentionRepository> IS_CATEGORY_LINKED_TO_INTENTIONS =
+        (category, intentionRepository) -> !intentionRepository.findAllByCategory(category).isEmpty();
 
     private final CategoryRepository categoryRepository;
     private final IntentionRepository intentionRepository;
@@ -88,7 +91,11 @@ public class MysqlCategoryService implements CategoryService {
 
         Optional<Category> categoryDto = categoryRepository.findByCategoryId(uuid);
 
-        return categoryDto.map(categoryEntityToDTO).orElseThrow();
+        return categoryDto.map(categoryEntityToDTO)
+            .orElseThrow(() -> new IntentionerException(
+                HttpStatus.NOT_FOUND.value(),
+                "Category not found: " + categoryId
+            ));
     }
 
     /**
@@ -136,7 +143,7 @@ public class MysqlCategoryService implements CategoryService {
                 )
             );
 
-        if(!intentionRepository.findAllByCategory(category).isEmpty()){
+        if(IS_CATEGORY_LINKED_TO_INTENTIONS.test(category, intentionRepository)){
             throw new IntentionerException(HttpStatus.CONFLICT.value(), "Category contains intentions");
         }
 

@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -74,5 +75,28 @@ public class Category {
 
     public UUID getCategoryId() {
         return categoryId;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+
+        Category category = (Category) obj;
+        return Objects.equals(id, category.id)
+            && Objects.equals(name, category.name)
+            && Objects.equals(label, category.label)
+            && Objects.equals(categoryId, category.categoryId)
+            && Objects.equals(intentions, category.intentions);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, label, categoryId, intentions);
     }
 }

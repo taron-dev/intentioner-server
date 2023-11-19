@@ -8,14 +8,14 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import sk.taron.intentioner.model.IntentionModificationRequest;
 import sk.taron.intentioner.operation.IntentionFromIntentionModificationRequest;
 import sk.taron.intentioner.persistence.CategoryRepository;
-import sk.taron.intentioner.persistence.entity.Category;
 
 import java.util.Optional;
-import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
+import static sk.taron.intentioner.CategoryDataProvider.CATEGORY_ID;
+import static sk.taron.intentioner.CategoryDataProvider.CATEGORY_UUID;
 
 /**
  * Tests for {@link IntentionFromIntentionModificationRequest} implemented by {@link IntentionFromIntentionModificationRequestComposer}.
@@ -23,14 +23,11 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class IntentionFromIntentionModificationRequestComposerTest {
 
-    private static final String CATEGORY_ID = "categoryId";
     private static final String TEXT = "text";
-    private static final UUID CATEGORY_UUID = UUID.fromString(CATEGORY_ID);
     private static final IntentionModificationRequest REQUEST = new IntentionModificationRequest(
         TEXT,
         CATEGORY_ID
     );
-    private static final Category CATEGORY = new Category();
 
     @Mock
     private CategoryRepository categoryRepository;

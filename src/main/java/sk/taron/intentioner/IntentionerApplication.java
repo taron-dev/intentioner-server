@@ -9,5 +9,4 @@ public class IntentionerApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(IntentionerApplication.class, args);
 	}
-
 }
