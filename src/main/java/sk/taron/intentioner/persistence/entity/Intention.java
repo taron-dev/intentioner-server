@@ -3,11 +3,10 @@ package sk.taron.intentioner.persistence.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.PrePersist;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -19,7 +18,7 @@ import java.util.UUID;
 public class Intention {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String text;
@@ -40,7 +39,7 @@ public class Intention {
     /**
      * The constructor used for creating new entity.
      *
-     * @param text the intention's text
+     * @param text     the intention's text
      * @param category the category to which is intention related
      */
     public Intention(String text, Category category) {
@@ -52,9 +51,9 @@ public class Intention {
     /**
      * The constructor used for updating existing intention.
      *
-     * @param id the id
-     * @param text the text
-     * @param category the related category
+     * @param id          the id
+     * @param text        the text
+     * @param category    the related category
      * @param intentionId the intention id
      */
     public Intention(Long id, String text, Category category, UUID intentionId) {
@@ -82,11 +81,11 @@ public class Intention {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj){
+        if (this == obj) {
             return true;
         }
 
-        if (obj == null || getClass() != obj.getClass()){
+        if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
 

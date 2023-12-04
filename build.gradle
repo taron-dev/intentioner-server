@@ -15,15 +15,6 @@ repositories {
 	mavenCentral()
 }
 
-sourceSets {
-	integrationTest {
-		java {
-			compileClasspath += main.output + test.output
-			runtimeClasspath += main.output + test.output
-		}
-	}
-}
-
 configurations {
 	integrationTestImplementation.extendsFrom(testImplementation)
 	integrationTestRuntimeOnly.extendsFrom(testRuntimeOnly)
@@ -34,6 +25,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 
+
+	implementation group: 'org.liquibase', name: 'liquibase-core', version: '4.25.0'
 	implementation group: 'com.mysql', name: 'mysql-connector-j', version: '8.1.0'
 	implementation group: 'jakarta.validation', name: 'jakarta.validation-api', version: '3.0.2'
 	implementation group: 'jakarta.inject', name: 'jakarta.inject-api', version: '2.0.1'
@@ -43,13 +36,5 @@ dependencies {
 }
 
 tasks.named('test') {
-	useJUnitPlatform()
-}
-
-tasks.register('integrationTest', Test) {
-	description = "Run integration tests"
-	group = "verification"
-	testClassesDirs = sourceSets.integrationTest.output.classesDirs
-	classpath = sourceSets.integrationTest.runtimeClasspath
 	useJUnitPlatform()
 }
