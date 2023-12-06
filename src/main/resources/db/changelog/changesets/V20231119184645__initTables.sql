@@ -17,8 +17,8 @@ CREATE TABLE IF NOT EXISTS intention (
   id BIGINT PRIMARY KEY,
   text VARCHAR(255),
   category_id BIGINT,
-  intention_id BINARY(16) NOT NULL UNIQUE,
-  FOREIGN KEY (category_id) REFERENCES category(id)
+  intention_id BINARY(16) NOT NULL UNIQUE
+  --FOREIGN KEY (category_id) REFERENCES category(id) - not supported by planetscale free db
 );
 
 ALTER TABLE intention MODIFY id BIGINT AUTO_INCREMENT;
